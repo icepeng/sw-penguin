@@ -7,7 +7,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "deploy": "ng build --prod --base-href=https://icepeng.github.io/sw-penguin/ && ngh --dir dist/sw-penguin"
   },
   "private": true,
   "dependencies": {

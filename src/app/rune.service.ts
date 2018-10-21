@@ -116,9 +116,13 @@ export class RuneService {
   getEfficiency(rune: Rune) {
     let ratio = 0.0;
 
-    ratio +=
-      runeMapping.mainstat[rune.priEff.type].max[rune.star] /
-      runeMapping.mainstat[rune.priEff.type].max[6];
+    if (rune.slot === 2 || rune.slot === 4 || rune.slot === 6) {
+      ratio +=
+        runeMapping.mainstat[rune.priEff.type].max[rune.star] /
+        runeMapping.mainstat[rune.priEff.type].max[6];
+    } else {
+      ratio += 1;
+    }
 
     const ratios = [];
 
