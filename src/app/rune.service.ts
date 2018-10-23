@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { monsterMapping, runeMapping } from './mapping';
 import { Monster } from './monster.model';
-import { Rune, RuneView } from './rune.model';
+import { EFFECT_TYPE, Rune, RuneView } from './rune.model';
 
 @Injectable({
   providedIn: 'root',
@@ -115,18 +115,30 @@ export class RuneService {
 
   getEfficiency(rune: Rune) {
     let ratio = 0.0;
+    const effective = [
+      '체퍼',
+      '공퍼',
+      '방퍼',
+      '공속',
+      '치확',
+      '치피',
+      '효저',
+      '효적',
+    ] as EFFECT_TYPE[];
 
-    if (rune.slot === 2 || rune.slot === 4 || rune.slot === 6) {
-      ratio +=
-        runeMapping.mainstat[rune.priEff.type].max[rune.star] /
-        runeMapping.mainstat[rune.priEff.type].max[6];
-    } else {
-      ratio += 1;
+    if (effective.includes(rune.priEff.type)) {
+      if (rune.slot === 2 || rune.slot === 4 || rune.slot === 6) {
+        ratio +=
+          runeMapping.mainstat[rune.priEff.type].max[rune.star] /
+          runeMapping.mainstat[rune.priEff.type].max[6];
+      } else {
+        ratio += 1;
+      }
     }
 
     const ratios = [];
 
-    rune.secEff.forEach(stat => {
+    rune.secEff.filter(x => effective.includes(x.type)).forEach(stat => {
       const value =
         stat.grindAmount && stat.grindAmount > 0
           ? stat.amount + stat.grindAmount
@@ -134,7 +146,7 @@ export class RuneService {
       ratios.push(value / runeMapping.substat[stat.type].max[6]);
     });
 
-    if (rune.prefixEff && rune.prefixEff[0] > 0) {
+    if (rune.prefixEff && effective.includes(rune.prefixEff.type)) {
       ratios.push(
         rune.prefixEff.amount / runeMapping.substat[rune.prefixEff.type].max[6],
       );
@@ -165,3 +177,4 @@ export class RuneService {
     };
   }
 }
+// TODO: 5성 부옵 max 계산 제대로 하기.
