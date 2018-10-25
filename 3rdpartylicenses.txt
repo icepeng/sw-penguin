@@ -344,13 +344,16 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 
-@angular/animations
-MIT
-
 @angular/common
 MIT
 
 @angular/platform-browser
+MIT
+
+@angular/forms
+MIT
+
+@angular/animations
 MIT
 
 @angular/material/tooltip
@@ -365,10 +368,9 @@ MIT
 
 @angular/material/toolbar
 
-@angular/material/form-field
+@angular/material/slide-toggle
 
-@angular/forms
-MIT
+@angular/material/form-field
 
 @angular/material/icon
 
