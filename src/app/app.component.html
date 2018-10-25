@@ -2,6 +2,7 @@
   <span>SW Penguin</span>
 </mat-toolbar>
 <section class="main">
+  <mat-slide-toggle [formControl]="happyCurcuit">행복회로</mat-slide-toggle>
   <mat-form-field>
     <input matInput (keydown.enter)="applyFilter($event.target.value)" (blur)="applyFilter($event.target.value)" placeholder="Filter">
   </mat-form-field>

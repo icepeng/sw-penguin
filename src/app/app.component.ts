@@ -5,10 +5,11 @@ import {
   MatPaginator,
   MatSort,
 } from '@angular/material';
-import { combineLatest, map } from 'rxjs/operators';
+import { combineLatest, map, startWith } from 'rxjs/operators';
 import { RuneView } from './rune.model';
 import { RuneService } from './rune.service';
 import { FileDialogComponent } from './file-dialog/file-dialog.component';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -44,6 +45,8 @@ export class AppComponent implements OnInit {
     전설: '#FDAC51',
   };
 
+  happyCurcuit = new FormControl(false);
+
   constructor(private runeService: RuneService, public dialog: MatDialog) {}
 
   ngOnInit() {
@@ -70,6 +73,12 @@ export class AppComponent implements OnInit {
           return false;
         }
         if (keyTrim === '슬롯' && data.slot !== +valueTrim) {
+          if (valueTrim === '짝수' && data.slot % 2 === 0) {
+            return match;
+          }
+          if (valueTrim === '홀수' && data.slot % 2 === 1) {
+            return match;
+          }
           return false;
         }
         if (keyTrim === '등급' && data.star !== +valueTrim) {
@@ -95,9 +104,17 @@ export class AppComponent implements OnInit {
     };
     this.runeService.monsterMap$
       .pipe(
-        combineLatest(this.runeService.runes$),
-        map(([monsterMap, runes]) =>
-          runes.map(rune => this.runeService.getRuneView(rune, monsterMap)),
+        combineLatest(
+          this.runeService.runes$,
+          this.happyCurcuit.valueChanges.pipe(startWith(false)),
+        ),
+        map(([monsterMap, runes, happyCurcuit]) =>
+          runes.map(rune =>
+            this.runeService.getRuneView(
+              happyCurcuit ? this.runeService.happyCurcuit(rune) : rune,
+              monsterMap,
+            ),
+          ),
         ),
       )
       .subscribe(runeViews => (this.dataSource.data = runeViews));
@@ -106,7 +123,7 @@ export class AppComponent implements OnInit {
   openDialog() {
     const dialogRef = this.dialog.open(FileDialogComponent);
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
+      // console.log(result);
     });
   }
 

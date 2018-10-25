@@ -19,7 +19,8 @@ export type SET_TYPE =
   | '결의'
   | '고양'
   | '명중'
-  | '근성';
+  | '근성'
+  | '태고';
 
 export type EFFECT_TYPE =
   | '깡체'
@@ -33,6 +34,8 @@ export type EFFECT_TYPE =
   | '치피'
   | '효저'
   | '효적';
+
+export type RARITY_TYPE = '일반' | '마법' | '희귀' | '영웅' | '전설';
 
 export interface Rune {
   id: number;
@@ -55,14 +58,14 @@ export interface Rune {
   slot: 1 | 2 | 3 | 4 | 5 | 6;
   set: SET_TYPE;
   upgrade: number;
-  rarity: string;
+  rarity: RARITY_TYPE;
 }
 
 export interface RuneView {
   id: number;
   set: SET_TYPE;
   upgrade: number;
-  rarity: string;
+  rarity: RARITY_TYPE;
   star: number;
   slot: 1 | 2 | 3 | 4 | 5 | 6;
   priEff: string;

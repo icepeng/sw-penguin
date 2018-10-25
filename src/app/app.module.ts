@@ -5,10 +5,17 @@ import { AppComponent } from './app.component';
 import { FileDialogComponent } from './file-dialog/file-dialog.component';
 import { MaterialModule } from './material/material.module';
 import { RuneService } from './rune.service';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent, FileDialogComponent],
-  imports: [BrowserModule, BrowserAnimationsModule, MaterialModule],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    MaterialModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
   providers: [RuneService],
   entryComponents: [FileDialogComponent],
   bootstrap: [AppComponent],

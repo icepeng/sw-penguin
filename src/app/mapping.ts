@@ -1,3 +1,5 @@
+import { EFFECT_TYPE, RARITY_TYPE, SET_TYPE } from './rune.model';
+
 export const monsterMapping = {
   attributes: {
     1: 'Water',
@@ -850,7 +852,7 @@ export const monsterMapping = {
 
 export const runeMapping = {
   effectTypes: {
-    0: '',
+    0: null,
     1: '깡체',
     2: '체퍼',
     3: '깡공',
@@ -862,7 +864,7 @@ export const runeMapping = {
     10: '치피',
     11: '효저',
     12: '효적',
-  },
+  } as { [key: number]: EFFECT_TYPE },
   sets: {
     1: '활력',
     2: '수호',
@@ -885,15 +887,15 @@ export const runeMapping = {
     21: '고양',
     22: '명중',
     23: '근성',
-    99: 'Immemorial',
-  },
+    99: '태고',
+  } as { [key: number]: SET_TYPE },
   rarity: {
     1: '일반',
     2: '마법',
     3: '희귀',
     4: '영웅',
     5: '전설',
-  },
+  } as { [key: number]: RARITY_TYPE },
   mainstat: {
     깡체: {
       max: {
