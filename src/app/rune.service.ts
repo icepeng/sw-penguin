@@ -110,27 +110,37 @@ export class RuneService {
             (x.grindAmount ? `(+${x.grindAmount})` : ''),
         )
         .join(', '),
-      efficiency: eff.current,
-      efficiency1: eff.current1,
-      efficiency2: eff.current2,
-      efficiency3: eff.current3,
-      efficiency4: eff.current4,
-      maxEfficiency: happyEff.current,
-      maxEfficiency2: happyEff.current2,
+      efficiency: eff,
+      maxEfficiency: happyEff,
       location: monster ? monster.masterName : 'Inventory',
     };
   }
 
-  happyCurcuit(rune: Rune, effective: EFFECT_TYPE[] = [
-    '체퍼',
-    '공퍼',
-    '방퍼',
-    '공속',
-    '치확',
-    '치피',
-    '효저',
-    '효적',
-  ]): Rune {
+  private isImpossible(rune: Rune, type: EFFECT_TYPE) {
+    return (
+      (rune.slot === 1 && type === '방퍼') ||
+      (rune.slot === 3 && type === '공퍼') ||
+      rune.priEff.type === type
+    );
+  }
+
+  happyCurcuit(
+    rune: Rune,
+    effective: EFFECT_TYPE[] = [
+      '체퍼',
+      '공퍼',
+      '방퍼',
+      '공속',
+      '치확',
+      '치피',
+      '효저',
+      '효적',
+    ],
+  ): Rune {
+    if (rune.upgrade === 15) {
+      return rune;
+    }
+
     const upgradeFrom = Math.min(Math.floor(rune.upgrade / 3), 4);
     const secEffLines = rune.secEff.length;
     const upgradeExisting = Math.max(secEffLines - upgradeFrom, 0);
@@ -138,22 +148,22 @@ export class RuneService {
 
     const existingPriority = effective
       .filter(type => rune.secEff.find(x => x.type === type))
+      .filter(type => !this.isImpossible(rune, type))
       .sort((a, b) => {
         return (
-          runeMapping.substat[b].max[rune.star] /
-            runeMapping.substat[b].max[6] -
-          runeMapping.substat[a].max[rune.star] / runeMapping.substat[a].max[6]
+          runeMapping.substat[b].max[rune.star] / runeMapping.fullStat[b] -
+          runeMapping.substat[a].max[rune.star] / runeMapping.fullStat[a]
         );
       });
     const newPriority = effective
       .filter(
         type => ![...rune.secEff, rune.prefixEff].find(x => x.type === type),
       )
+      .filter(type => !this.isImpossible(rune, type))
       .sort((a, b) => {
         return (
-          runeMapping.substat[b].max[rune.star] /
-            runeMapping.substat[b].max[6] -
-          runeMapping.substat[a].max[rune.star] / runeMapping.substat[a].max[6]
+          runeMapping.substat[b].max[rune.star] / runeMapping.fullStat[b] -
+          runeMapping.substat[a].max[rune.star] / runeMapping.fullStat[a]
         );
       });
 
@@ -185,58 +195,36 @@ export class RuneService {
     };
   }
 
-  getEfficiency(rune: Rune, effective: EFFECT_TYPE[] = [
-    '체퍼',
-    '공퍼',
-    '방퍼',
-    '공속',
-    '치확',
-    '치피',
-    '효저',
-    '효적',
-  ]) {
+  getEfficiency(
+    rune: Rune,
+    effective: EFFECT_TYPE[] = [
+      '체퍼',
+      '공퍼',
+      '방퍼',
+      '공속',
+      '치확',
+      '치피',
+      '효저',
+      '효적',
+    ],
+  ) {
     let ratio = 0.0;
-
-    if (rune.slot === 2 || rune.slot === 4 || rune.slot === 6) {
-      if (effective.includes(rune.priEff.type)) {
-        ratio +=
-          runeMapping.mainstat[rune.priEff.type].max[rune.star] /
-          runeMapping.mainstat[rune.priEff.type].max[6];
-      }
-    } else {
-      ratio += 1;
+    if (effective.includes(rune.priEff.type)) {
+      ratio += rune.priEff.amount / runeMapping.fullStat[rune.priEff.type];
     }
-
-    const ratios = [];
-
-    rune.secEff.filter(x => effective.includes(x.type)).forEach(stat => {
-      const value =
-        stat.grindAmount && stat.grindAmount > 0
-          ? stat.amount + stat.grindAmount
-          : stat.amount;
-      ratios.push(value / runeMapping.substat[stat.type].max[6]);
-    });
 
     if (rune.prefixEff && effective.includes(rune.prefixEff.type)) {
-      ratios.push(
-        rune.prefixEff.amount / runeMapping.substat[rune.prefixEff.type].max[6],
-      );
+      ratio +=
+        rune.prefixEff.amount / runeMapping.fullStat[rune.prefixEff.type];
     }
 
-    ratios.sort((a, b) => b - a);
+    rune.secEff.filter(x => effective.includes(x.type)).forEach(eff => {
+      const value = eff.amount + (eff.grindAmount || 0);
+      ratio += value / runeMapping.fullStat[eff.type];
+    });
 
-    const current1 = ratio + (ratios[0] || 0);
-    const current2 = current1 + (ratios[1] || 0);
-    const current3 = current2 + (ratios[2] || 0);
-    const current4 = current3 + (ratios[3] || 0);
-    const current = current4 + (ratios[4] || 0);
+    ratio /= runeMapping.slotDiv[rune.slot];
 
-    return {
-      current: current / 2.8,
-      current1: current1 / 2,
-      current2: current2 / 2.2,
-      current3: current3 / 2.4,
-      current4: current4 / 2.6,
-    };
+    return ratio;
   }
 }

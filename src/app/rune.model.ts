@@ -74,9 +74,4 @@ export interface RuneView {
   location: string;
   efficiency: number;
   maxEfficiency: number;
-  maxEfficiency2: number;
-  efficiency1: number;
-  efficiency2: number;
-  efficiency3: number;
-  efficiency4: number;
 }

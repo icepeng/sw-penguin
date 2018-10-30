@@ -43,19 +43,9 @@
         <td mat-cell *matCellDef="let row">{{row.efficiency | percent:'.1-1'}}</td>
       </ng-container>
 
-      <ng-container matColumnDef="efficiency2">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>현재 가치 (2)</th>
-        <td mat-cell *matCellDef="let row">{{row.efficiency2 | percent:'.1-1'}}</td>
-      </ng-container>
-
       <ng-container matColumnDef="maxEfficiency">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>최대 가치</th>
         <td mat-cell *matCellDef="let row">{{row.maxEfficiency | percent:'.1-1'}}</td>
-      </ng-container>
-
-      <ng-container matColumnDef="maxEfficiency2">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>최대 가치 (2)</th>
-        <td mat-cell *matCellDef="let row">{{row.maxEfficiency2 | percent:'.1-1'}}</td>
       </ng-container>
 
       <ng-container matColumnDef="priEff">
