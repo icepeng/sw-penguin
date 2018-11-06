@@ -1,3 +1,15 @@
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 200px;
+}
+
+.sidenav .mat-toolbar {
+  background: inherit;
+}
+
 .mat-toolbar.mat-primary {
   position: sticky;
   top: 0;
@@ -9,22 +21,8 @@
   margin: 12px auto 0;
 }
 
-.full-width-table {
-  width: 100%;
-}
-
 .fab {
   position: fixed;
   bottom: 24px;
   right: 24px;
-}
-
-.mat-form-field {
-  font-size: 14px;
-  width: 100%;
-}
-
-.table-container {
-  max-height: 700px;
-  overflow: auto;
 }

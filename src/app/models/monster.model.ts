@@ -1,3 +1,5 @@
+import { EFFECT_TYPE } from './rune.model';
+
 export class Monster {
   id: string;
   masterId: string;
@@ -12,4 +14,5 @@ export class Monster {
   resist: number;
   level: number;
   runes: number[];
+  effectiveList: EFFECT_TYPE[];
 }

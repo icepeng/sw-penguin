@@ -1,4 +1,4 @@
-import { EFFECT_TYPE, RARITY_TYPE, SET_TYPE } from './rune.model';
+import { EFFECT_TYPE, RARITY_TYPE, SET_TYPE } from './models/rune.model';
 
 export const monsterMapping = {
   attributes: {

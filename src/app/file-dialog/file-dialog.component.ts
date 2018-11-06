@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
-import { RuneService } from '../rune.service';
+import { ImportService } from '../services/import.service';
+import { Store } from '@ngrx/store';
+import { Import } from '../actions/import.actions';
 
 @Component({
   selector: 'app-file-dialog',
@@ -12,7 +14,8 @@ export class FileDialogComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<FileDialogComponent>,
-    public runeService: RuneService,
+    public runeService: ImportService,
+    private store: Store<any>,
   ) {}
 
   ngOnInit() {}
@@ -26,7 +29,10 @@ export class FileDialogComponent implements OnInit {
     const myReader: FileReader = new FileReader();
 
     myReader.onloadend = () => {
-      this.runeService.import(JSON.parse(myReader.result as string));
+      const imported = this.runeService.import(
+        JSON.parse(myReader.result as string),
+      );
+      this.store.dispatch(new Import(imported));
       this.dialogRef.close('success');
     };
 
