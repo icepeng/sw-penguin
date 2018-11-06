@@ -1,3 +1,51 @@
-<p>
-  monster-list works!
-</p>
+<mat-slide-toggle [formControl]="onlyRune">룬 장착된 몹만 표시</mat-slide-toggle>
+<mat-form-field>
+  <input matInput (keydown.enter)="applyFilter($event.target.value)" (blur)="applyFilter($event.target.value)"
+    placeholder="Filter">
+</mat-form-field>
+<div class="table-container-monster mat-elevation-z8">
+  <table mat-table class="full-width-table" [dataSource]="dataSource" [trackBy]="trackByFn" matSort aria-label="Elements">
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let row">
+        <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row.id) : null" [checked]="selection.isSelected(row.id)">
+        </mat-checkbox>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="masterName">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>이름</th>
+      <td mat-cell *matCellDef="let row">{{row.masterName}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="star">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>등급★</th>
+      <td mat-cell *matCellDef="let row">{{row.star}}★</td>
+    </ng-container>
+
+    <ng-container matColumnDef="level">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>레벨</th>
+      <td mat-cell *matCellDef="let row">{{row.level}}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</div>
+<mat-card *ngIf="selectedMonster$ | async as monster">
+  <mat-card-title>{{ monster.masterName }}</mat-card-title>
+  <mat-card-subtitle>{{ monster.star }}★, Level {{ monster.level }}</mat-card-subtitle>
+  <mat-card-content>
+    <h4 class="mat-h4">유효옵 설정</h4>
+    <form [formGroup]="formGroup">
+      <mat-checkbox formControlName="공퍼" class="checkbox-margin">공퍼</mat-checkbox>
+      <mat-checkbox formControlName="체퍼" class="checkbox-margin">체퍼</mat-checkbox>
+      <mat-checkbox formControlName="방퍼" class="checkbox-margin">방퍼</mat-checkbox>
+      <mat-checkbox formControlName="공속" class="checkbox-margin">공속</mat-checkbox>
+      <mat-checkbox formControlName="치확" class="checkbox-margin">치확</mat-checkbox>
+      <mat-checkbox formControlName="치피" class="checkbox-margin">치피</mat-checkbox>
+      <mat-checkbox formControlName="효적" class="checkbox-margin">효적</mat-checkbox>
+      <mat-checkbox formControlName="효저" class="checkbox-margin">효저</mat-checkbox>
+    </form>
+  </mat-card-content>
+</mat-card>

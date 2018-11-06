@@ -7,7 +7,6 @@ import { Import } from '../actions/import.actions';
 @Component({
   selector: 'app-file-dialog',
   templateUrl: './file-dialog.component.html',
-  styleUrls: ['./file-dialog.component.css'],
 })
 export class FileDialogComponent implements OnInit {
   listener: any;

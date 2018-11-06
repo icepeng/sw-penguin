@@ -27,6 +27,7 @@ export class ImportService {
       id: data.unit_id,
       masterId: data.unit_master_id,
       masterName: this.getMonsterName(data.unit_master_id),
+      star: data.class,
       level: data.unit_level,
       atk: data.atk,
       con: data.con,

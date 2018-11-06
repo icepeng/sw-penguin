@@ -7,9 +7,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MonsterListComponent } from './containers/monster-list.component';
 import { RuneListComponent } from './containers/rune-list.component';
-import { FileDialogComponent } from './file-dialog/file-dialog.component';
+import { FileDialogComponent } from './containers/file-dialog.component';
 import { MaterialModule } from './material/material.module';
-import { reducers } from './reducers';
+import { reducers, metaReducers } from './reducers';
 import { ImportService } from './services/import.service';
 
 @NgModule({
@@ -26,7 +26,7 @@ import { ImportService } from './services/import.service';
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    StoreModule.forRoot(reducers),
+    StoreModule.forRoot(reducers, { metaReducers }),
   ],
   providers: [ImportService],
   entryComponents: [FileDialogComponent],

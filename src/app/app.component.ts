@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { FileDialogComponent } from './file-dialog/file-dialog.component';
+import { FileDialogComponent } from './containers/file-dialog.component';
 
 @Component({
   selector: 'app-root',

@@ -12,6 +12,7 @@ export class Monster {
   criticalRate: number;
   spd: number;
   resist: number;
+  star: 1 | 2 | 3 | 4 | 5 | 6;
   level: number;
   runes: number[];
   effectiveList: EFFECT_TYPE[];

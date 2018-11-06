@@ -11,3 +11,13 @@
   max-height: 700px;
   overflow: auto;
 }
+
+.table-container-monster {
+  max-height: 300px;
+  overflow: auto;
+  margin-bottom: 24px;
+}
+
+.checkbox-margin {
+  margin: 0 10px;
+}

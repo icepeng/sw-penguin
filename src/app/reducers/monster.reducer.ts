@@ -4,20 +4,19 @@ import {
   ImportActionsUnion,
   ImportActionTypes,
 } from '../actions/import.actions';
-import { MonsterActionsUnion, MonsterActionTypes } from '../actions/monster.actions';
+import {
+  MonsterActionsUnion,
+  MonsterActionTypes,
+} from '../actions/monster.actions';
 
-export interface State extends EntityState<Monster> {
-  //   selectedMonsterId: number | null;
-}
+export interface State extends EntityState<Monster> {}
 
 export const adapter: EntityAdapter<Monster> = createEntityAdapter<Monster>({
   selectId: (monster: Monster) => monster.id,
   sortComparer: false,
 });
 
-export const initialState: State = adapter.getInitialState({
-  //   selectedMonsterId: null,
-});
+export const initialState: State = adapter.getInitialState({});
 
 export function reducer(
   state = initialState,
@@ -32,10 +31,12 @@ export function reducer(
       return adapter.addOne(action.payload, state);
     }
 
+    case MonsterActionTypes.UpdateMonster: {
+      return adapter.updateOne(action.payload, state);
+    }
+
     default: {
       return state;
     }
   }
 }
-
-// export const getSelectedId = (state: State) => state.selectedMonsterId;

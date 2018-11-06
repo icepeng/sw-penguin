@@ -6,18 +6,14 @@ import {
 } from '../actions/import.actions';
 import { RuneActionsUnion, RuneActionTypes } from '../actions/rune.actions';
 
-export interface State extends EntityState<Rune> {
-  //   selectedRuneId: number | null;
-}
+export interface State extends EntityState<Rune> {}
 
 export const adapter: EntityAdapter<Rune> = createEntityAdapter<Rune>({
   selectId: (rune: Rune) => rune.id,
   sortComparer: false,
 });
 
-export const initialState: State = adapter.getInitialState({
-  //   selectedRuneId: null,
-});
+export const initialState: State = adapter.getInitialState({});
 
 export function reducer(
   state = initialState,
@@ -37,5 +33,3 @@ export function reducer(
     }
   }
 }
-
-// export const getSelectedId = (state: State) => state.selectedRuneId;

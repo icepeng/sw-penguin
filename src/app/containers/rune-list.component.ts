@@ -9,7 +9,7 @@ import * as fromRoot from '../reducers';
 @Component({
   selector: 'app-rune-list',
   templateUrl: './rune-list.component.html',
-  styleUrls: ['./rune-list.component.css'],
+  styleUrls: ['./list.component.css'],
 })
 export class RuneListComponent implements OnInit {
   @ViewChild(MatSort)
@@ -96,8 +96,8 @@ export class RuneListComponent implements OnInit {
       }, true);
     };
     this.happyCurcuit.valueChanges
-      .pipe(startWith(false))
       .pipe(
+        startWith(false),
         switchMap(isHappy => {
           return isHappy
             ? this.store.pipe(select(fromRoot.getHappyRuneViews))
@@ -111,7 +111,7 @@ export class RuneListComponent implements OnInit {
     this.dataSource.filter = filter.trim();
   }
 
-  trackByFn(rune: RuneView) {
+  trackByFn(index: number, rune: RuneView) {
     return rune.id;
   }
 }
