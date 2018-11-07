@@ -72,6 +72,6 @@ export interface RuneView {
   prefixEff: string;
   secEff: string;
   location: string;
-  efficiency: number;
   maxEfficiency: number;
+  bestMonster: string;
 }

@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatSort, MatTableDataSource } from '@angular/material';
 import { select, Store } from '@ngrx/store';
-import { startWith, switchMap } from 'rxjs/operators';
+import { startWith, switchMap, combineLatest } from 'rxjs/operators';
 import { RuneView } from '../models/rune.model';
 import * as fromRoot from '../reducers';
 
@@ -23,11 +23,11 @@ export class RuneListComponent implements OnInit {
     'star',
     'upgrade',
     'rarity',
-    'efficiency',
     'maxEfficiency',
     'priEff',
     'prefixEff',
     'secEff',
+    'bestMonster'
   ];
 
   colors = {
@@ -60,6 +60,9 @@ export class RuneListComponent implements OnInit {
           if (valueTrim === '*' && data.location !== 'Inventory') {
             return match;
           }
+          return false;
+        }
+        if (keyTrim === '추천몹' && data.bestMonster !== valueTrim) {
           return false;
         }
         if (keyTrim === '세트' && data.set !== valueTrim) {
@@ -98,13 +101,14 @@ export class RuneListComponent implements OnInit {
     this.happyCurcuit.valueChanges
       .pipe(
         startWith(false),
-        switchMap(isHappy => {
-          return isHappy
-            ? this.store.pipe(select(fromRoot.getHappyRuneViews))
-            : this.store.pipe(select(fromRoot.getRuneViews));
-        }),
+        combineLatest(this.store.pipe(select(fromRoot.getRuneViews))),
       )
-      .subscribe(runeViews => (this.dataSource.data = runeViews));
+      .subscribe(
+        ([isHappy, runeViews]) =>
+          (this.dataSource.data = isHappy
+            ? runeViews.map(x => x.best)
+            : runeViews.map(x => x.actual)),
+      );
   }
 
   applyFilter(filter: string) {

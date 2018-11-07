@@ -72,10 +72,3 @@ export const getRuneViews = createSelector(
   (monsterEntities, runes) =>
     runes.map(rune => buildRuneView(rune, monsterEntities)),
 );
-
-export const getHappyRuneViews = createSelector(
-  getMonsterEntities,
-  getAllRunes,
-  (monsterEntities, runes) =>
-    runes.map(rune => buildRuneView(happyCurcuit(rune), monsterEntities)),
-);
