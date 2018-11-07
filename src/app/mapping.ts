@@ -1,3 +1,4 @@
+// tslint:disable:quotemark
 import { EFFECT_TYPE, RARITY_TYPE, SET_TYPE } from './models/rune.model';
 
 export const monsterMapping = {
