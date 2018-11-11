@@ -10,12 +10,11 @@
 .table-container {
   max-height: 700px;
   overflow: auto;
+  margin-bottom: 24px;
 }
 
-.table-container-monster {
+.table-container.short {
   max-height: 300px;
-  overflow: auto;
-  margin-bottom: 24px;
 }
 
 .checkbox-margin {

@@ -3,7 +3,7 @@
   <input matInput (keydown.enter)="applyFilter($event.target.value)" (blur)="applyFilter($event.target.value)"
     placeholder="Filter">
 </mat-form-field>
-<div class="table-container-monster mat-elevation-z8">
+<div [class.short]="selectedMonster$ | async" class="table-container mat-elevation-z8">
   <table mat-table class="full-width-table" [dataSource]="dataSource" [trackBy]="trackByFn" matSort aria-label="Elements">
     <ng-container matColumnDef="select">
       <th mat-header-cell *matHeaderCellDef></th>
@@ -29,7 +29,7 @@
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr (click)="selection.toggle(row.id)" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 </div>
 <mat-card *ngIf="selectedMonster$ | async as monster">

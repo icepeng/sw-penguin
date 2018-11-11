@@ -1,9 +1,11 @@
+import { SelectionModel } from '@angular/cdk/collections';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSort, MatTableDataSource } from '@angular/material';
 import { select, Store } from '@ngrx/store';
-import { startWith, switchMap, combineLatest } from 'rxjs/operators';
-import { RuneView } from '../models/rune.model';
+import { Observable } from 'rxjs';
+import { combineLatest, map, startWith, withLatestFrom } from 'rxjs/operators';
+import { Rune, RuneView } from '../models/rune.model';
 import * as fromRoot from '../reducers';
 
 @Component({
@@ -16,7 +18,15 @@ export class RuneListComponent implements OnInit {
   sort: MatSort;
 
   dataSource = new MatTableDataSource<RuneView>();
+  colors = {
+    일반: '#FFF',
+    마법: '#04D25F',
+    희귀: '#49EED6',
+    영웅: '#ED88FB',
+    전설: '#FDAC51',
+  };
   displayedColumns = [
+    'select',
     'location',
     'set',
     'slot',
@@ -27,18 +37,12 @@ export class RuneListComponent implements OnInit {
     'priEff',
     'prefixEff',
     'secEff',
-    'bestMonster'
+    'bestMonster',
   ];
-
-  colors = {
-    일반: '#FFF',
-    마법: '#04D25F',
-    희귀: '#49EED6',
-    영웅: '#ED88FB',
-    전설: '#FDAC51',
-  };
-
   happyCurcuit = new FormControl(false);
+  selection = new SelectionModel<number>(false);
+
+  selectedRune$: Observable<Rune>;
 
   constructor(private store: Store<fromRoot.State>) {}
 
@@ -109,6 +113,13 @@ export class RuneListComponent implements OnInit {
             ? runeViews.map(x => x.best)
             : runeViews.map(x => x.actual)),
       );
+
+    this.selectedRune$ = this.selection.changed.pipe(
+      withLatestFrom(this.store.pipe(select(fromRoot.getRuneEntities))),
+      map(
+        ([change, monsterEntities]) => monsterEntities[change.added[0]] || null,
+      ),
+    );
   }
 
   applyFilter(filter: string) {

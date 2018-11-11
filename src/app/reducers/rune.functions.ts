@@ -99,8 +99,16 @@ function isImpossible(rune: Rune, type: EFFECT_TYPE) {
 }
 
 export function happyCurcuit(rune: Rune, effective: EFFECT_TYPE[]): Rune {
-  if (rune.upgrade === 15) {
-    return rune;
+  if (rune.upgrade >= 12) {
+    return {
+      ...rune,
+      priEff: {
+        type: rune.priEff.type,
+        amount: runeMapping.mainstat[rune.priEff.type].max[rune.star],
+      },
+      upgrade: 15,
+      rarity: '전설',
+    };
   }
 
   const existingPriority = effective
@@ -176,33 +184,78 @@ export function happyCurcuit(rune: Rune, effective: EFFECT_TYPE[]): Rune {
   };
 }
 
-export function getEfficiency(rune: Rune, effective: EFFECT_TYPE[]) {
-  const possibleEffective = effective.filter(x => !isImpossible(rune, x));
-  const divider = 0.8 + Math.min(possibleEffective.length, 5) * 0.2;
-
-  let ratio = 0.0;
-
-  if (rune.slot === 2 || rune.slot === 4 || rune.slot === 6) {
-    if (effective.includes(rune.priEff.type)) {
-      ratio +=
-        runeMapping.mainstat[rune.priEff.type].max[rune.star] /
-          runeMapping.mainstat[rune.priEff.type].max[6];
-    }
-    ratio -= 1;
+export function getMainNumbers(
+  rune: Rune,
+  effective: EFFECT_TYPE[],
+): { numerator: number; denominator: number } {
+  if (rune.slot % 2 !== 0) {
+    return {
+      numerator: 0,
+      denominator: 0,
+    };
   }
+  const possiblePrimaries = effective.filter(
+    x => runeMapping.slotMainStats[rune.slot][x],
+  );
+  if (possiblePrimaries.length === 0) {
+    return {
+      numerator: 0,
+      denominator: 0,
+    };
+  }
+  const denominator = Math.max(
+    ...possiblePrimaries.map(
+      x => runeMapping.mainstat[x].max[6] / runeMapping.substat[x].max[6],
+    ),
+  );
+  if (possiblePrimaries.includes(rune.priEff.type)) {
+    return {
+      numerator:
+        runeMapping.mainstat[rune.priEff.type].max[rune.star] /
+        runeMapping.substat[rune.priEff.type].max[6],
+      denominator,
+    };
+  }
+  return {
+    numerator: 0,
+    denominator,
+  };
+}
 
-  rune.secEff.filter(x => possibleEffective.includes(x.type)).forEach(stat => {
-    const value =
-      stat.grindAmount && stat.grindAmount > 0
-        ? stat.amount + stat.grindAmount
-        : stat.amount;
-    ratio += value / runeMapping.substat[stat.type].max[6];
-  });
+export function getSubNumbers(
+  rune: Rune,
+  effective: EFFECT_TYPE[],
+): { numerator: number; denominator: number } {
+  let numerator = 0.0;
+  const possibleEffective = effective.filter(x => !isImpossible(rune, x));
+  rune.secEff
+    .filter(x => possibleEffective.includes(x.type))
+    .forEach(stat => {
+      numerator +=
+        (stat.grindAmount && stat.grindAmount > 0
+          ? stat.amount + stat.grindAmount
+          : stat.amount) / runeMapping.substat[stat.type].max[6];
+    });
 
   if (rune.prefixEff && possibleEffective.includes(rune.prefixEff.type)) {
-    ratio +=
+    numerator +=
       rune.prefixEff.amount / runeMapping.substat[rune.prefixEff.type].max[6];
   }
 
-  return ratio / divider;
+  const denominator =
+    Math.min(possibleEffective.length, 1) * 0.8 +
+    Math.min(possibleEffective.length, 5) * 0.2;
+  return {
+    numerator,
+    denominator,
+  };
+}
+
+export function getEfficiency(rune: Rune, effective: EFFECT_TYPE[]) {
+  const mainNumbers = getMainNumbers(rune, effective);
+  const subNumbers = getSubNumbers(rune, effective);
+  return (
+    (mainNumbers.numerator + subNumbers.numerator) /
+    (mainNumbers.denominator + subNumbers.denominator)
+  );
 }
