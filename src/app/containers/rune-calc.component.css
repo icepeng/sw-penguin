@@ -20,3 +20,7 @@
 .wrapper {
   display: flex;
 }
+
+mat-divider {
+    margin: 1em 0;
+}
