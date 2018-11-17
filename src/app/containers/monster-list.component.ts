@@ -1,20 +1,20 @@
+import { SelectionModel } from '@angular/cdk/collections';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { MatSort, MatTableDataSource } from '@angular/material';
 import { select, Store } from '@ngrx/store';
-import { Monster } from '../models/monster.model';
-import * as fromRoot from '../reducers';
-import { FormControl, FormGroup } from '@angular/forms';
+import { Observable } from 'rxjs';
 import {
-  startWith,
   combineLatest,
-  map,
   filter,
+  map,
+  startWith,
   withLatestFrom,
 } from 'rxjs/operators';
-import { SelectionModel } from '@angular/cdk/collections';
-import { Observable } from 'rxjs';
 import { UpdateMonster } from '../actions/monster.actions';
+import { Monster } from '../models/monster.model';
 import { EFFECT_TYPE } from '../models/rune.model';
+import * as fromRoot from '../reducers';
 
 @Component({
   selector: 'app-monster-list',

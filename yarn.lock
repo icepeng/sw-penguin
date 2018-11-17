@@ -276,6 +276,10 @@
     lodash "^4.17.10"
     to-fast-properties "^2.0.0"
 
+"@ngrx/effects@^6.1.2":
+  version "6.1.2"
+  resolved "https://registry.yarnpkg.com/@ngrx/effects/-/effects-6.1.2.tgz#602f3ee9798e00179075ddef030ded88c28b1aa1"
+
 "@ngrx/entity@^7.0.0-beta.0":
   version "7.0.0-beta.0"
   resolved "https://registry.yarnpkg.com/@ngrx/entity/-/entity-7.0.0-beta.0.tgz#3e27f0d1674313e14611321d4f428bc6339dbcb4"

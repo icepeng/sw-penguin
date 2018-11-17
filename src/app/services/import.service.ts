@@ -10,7 +10,12 @@ export class ImportService {
   constructor() {}
 
   import(data) {
-    const monsters = data.unit_list.map(x => this.assignMonster(x));
+    const effectiveListMap = new Map(
+      JSON.parse(localStorage.getItem('eff') || '[]'),
+    );
+    const monsters = data.unit_list.map(x =>
+      this.assignMonster(x, effectiveListMap.get(x.unit_id) || []),
+    );
     const monsterRunes = data.unit_list
       .reduce((arr, x) => [...arr, ...x.runes], [])
       .map(x => this.assignRune(x));
@@ -22,7 +27,7 @@ export class ImportService {
     };
   }
 
-  assignMonster(data): Monster {
+  assignMonster(data, effectiveList): Monster {
     return {
       id: data.unit_id,
       masterId: data.unit_master_id,
@@ -38,7 +43,7 @@ export class ImportService {
       criticalRate: data.critical_rate,
       criticalDamage: data.critical_damage,
       runes: data.runes.map(x => x.rune_id),
-      effectiveList: [],
+      effectiveList: effectiveList,
     };
   }
 
