@@ -1,0 +1,22 @@
+.row {
+  display: flex;
+}
+
+.row mat-form-field {
+  margin-right: 1em;
+}
+
+.form-area,
+.stat-area {
+  background: #fff;
+  padding: 1em;
+  flex: 1;
+}
+
+.form-area {
+  margin-right: 1em;
+}
+
+.wrapper {
+  display: flex;
+}

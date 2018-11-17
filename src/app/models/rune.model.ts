@@ -37,6 +37,44 @@ export type EFFECT_TYPE =
 
 export type RARITY_TYPE = '일반' | '마법' | '희귀' | '영웅' | '전설';
 
+export const ALL_SETS: SET_TYPE[] = [
+  '활력',
+  '수호',
+  '신속',
+  '칼날',
+  '격노',
+  '집중',
+  '인내',
+  '맹공',
+  '절망',
+  '흡혈',
+  '폭주',
+  '응보',
+  '의지',
+  '보호',
+  '반격',
+  '파괴',
+  '투지',
+  '결의',
+  '고양',
+  '명중',
+  '근성',
+];
+
+export const ALL_EFFECTS: EFFECT_TYPE[] = [
+  '깡체',
+  '체퍼',
+  '깡공',
+  '공퍼',
+  '깡방',
+  '방퍼',
+  '공속',
+  '치확',
+  '치피',
+  '효저',
+  '효적',
+];
+
 export interface Rune {
   id: number;
   occupiedId: number;

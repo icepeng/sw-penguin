@@ -1,0 +1,159 @@
+<div class="wrapper">
+  <div class="form-area mat-elevation-z2">
+    <form [formGroup]="formGroup">
+      <div class="row">
+        <mat-form-field>
+          <mat-select formControlName="set" placeholder="세트">
+            <mat-option>-</mat-option>
+            <mat-option *ngFor="let set of sets" [value]="set">{{
+              set
+            }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-select required formControlName="slot" placeholder="슬롯">
+            <mat-option>-</mat-option>
+            <mat-option *ngFor="let slot of slots" [value]="slot">{{
+              slot
+            }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="row">
+        <mat-form-field>
+          <mat-select required formControlName="star" placeholder="등급★">
+            <mat-option>-</mat-option>
+            <mat-option *ngFor="let star of stars" [value]="star"
+              >{{ star }}★</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-select required formControlName="upgrade" placeholder="강화">
+            <mat-option>-</mat-option>
+            <mat-option *ngFor="let upgrade of upgrades" [value]="upgrade"
+              >+{{ upgrade }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="row">
+        <mat-form-field>
+          <mat-select required formControlName="priEff" placeholder="주옵">
+            <mat-option>-</mat-option>
+            <mat-option *ngFor="let effect of effects" [value]="effect">{{
+              effect
+            }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            formControlName="priEffAmount"
+            matInput
+            placeholder="주옵 수치"
+            type="number"
+          />
+        </mat-form-field>
+      </div>
+      <div class="row">
+        <mat-form-field>
+          <mat-select formControlName="prefixEff" placeholder="접두옵">
+            <mat-option>-</mat-option>
+            <mat-option *ngFor="let effect of effects" [value]="effect">{{
+              effect
+            }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            formControlName="prefixEffAmount"
+            matInput
+            placeholder="접두옵 수치"
+            type="number"
+          />
+        </mat-form-field>
+      </div>
+      <div class="row">
+        <mat-form-field>
+          <mat-select formControlName="secEff1" placeholder="옵션1">
+            <mat-option>-</mat-option>
+            <mat-option *ngFor="let effect of effects" [value]="effect">{{
+              effect
+            }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            formControlName="secEff1Amount"
+            matInput
+            placeholder="옵션1 수치"
+            type="number"
+          />
+        </mat-form-field>
+      </div>
+      <div class="row">
+        <mat-form-field>
+          <mat-select formControlName="secEff2" placeholder="옵션2">
+            <mat-option>-</mat-option>
+            <mat-option *ngFor="let effect of effects" [value]="effect">{{
+              effect
+            }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            formControlName="secEff2Amount"
+            matInput
+            placeholder="옵션2 수치"
+            type="number"
+          />
+        </mat-form-field>
+      </div>
+      <div class="row">
+        <mat-form-field>
+          <mat-select formControlName="secEff3" placeholder="옵션3">
+            <mat-option>-</mat-option>
+            <mat-option *ngFor="let effect of effects" [value]="effect">{{
+              effect
+            }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            formControlName="secEff3Amount"
+            matInput
+            placeholder="옵션3 수치"
+            type="number"
+          />
+        </mat-form-field>
+      </div>
+      <div class="row">
+        <mat-form-field>
+          <mat-select formControlName="secEff4" placeholder="옵션4">
+            <mat-option>-</mat-option>
+            <mat-option *ngFor="let effect of effects" [value]="effect">{{
+              effect
+            }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <input
+            formControlName="secEff4Amount"
+            matInput
+            placeholder="옵션4 수치"
+            type="number"
+          />
+        </mat-form-field>
+      </div>
+    </form>
+  </div>
+  <div class="stat-area mat-elevation-z2">
+    <div *ngIf="(runeView$ | async) as runeView">
+      <h1 class="mat-h1">행복회로</h1>
+      {{ runeView.priEff }}<br />
+      {{ runeView.secEff }}
+      <h1 class="mat-h1">추천몹 / 가치</h1>
+      {{ runeView.bestMonster }} / {{ runeView.maxEfficiency | percent:'.1-1' }}
+    </div>
+  </div>
+</div>

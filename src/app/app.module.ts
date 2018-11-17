@@ -11,6 +11,7 @@ import { FileDialogComponent } from './containers/file-dialog.component';
 import { MaterialModule } from './material/material.module';
 import { reducers, metaReducers } from './reducers';
 import { ImportService } from './services/import.service';
+import { RuneCalcComponent } from './containers/rune-calc.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { ImportService } from './services/import.service';
     FileDialogComponent,
     MonsterListComponent,
     RuneListComponent,
+    RuneCalcComponent,
   ],
   imports: [
     BrowserModule,

@@ -3,7 +3,7 @@
   <input matInput (keydown.enter)="applyFilter($event.target.value)" (blur)="applyFilter($event.target.value)"
     placeholder="Filter">
 </mat-form-field>
-<div class="table-container mat-elevation-z8">
+<div [class.short]="selectedRune$ | async" class="table-container mat-elevation-z8">
   <table mat-table class="full-width-table" [dataSource]="dataSource" [trackBy]="trackByFn" matSort aria-label="Elements">
     <ng-container matColumnDef="select">
       <th mat-header-cell *matHeaderCellDef></th>
