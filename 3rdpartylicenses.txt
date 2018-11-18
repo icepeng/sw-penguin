@@ -394,12 +394,14 @@ MIT
 @angular/router
 MIT
 
+@angular/forms
+MIT
+
+@angular/material/checkbox
+
 @angular/material/sort
 
 @angular/material/table
-
-@angular/forms
-MIT
 
 @angular/material/slide-toggle
 
@@ -411,9 +413,13 @@ MIT
 @ngrx/entity
 MIT
 
-@angular/material/checkbox
-
 @angular/material/card
+
+@angular/material/core
+
+@angular/material/divider
+
+@angular/material/select
 
 @angular/material/button
 
@@ -423,9 +429,10 @@ MIT
 
 @angular/material/toolbar
 
-@angular/material/core
-
 @angular/material/list
+
+@ngrx/effects
+MIT
 
 zone.js
 MIT
