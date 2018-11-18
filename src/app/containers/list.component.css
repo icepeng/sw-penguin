@@ -10,7 +10,6 @@
 .table-container {
   max-height: 700px;
   overflow: auto;
-  margin-bottom: 24px;
 }
 
 .table-container.short {
@@ -19,4 +18,8 @@
 
 .checkbox-margin {
   margin: 0 10px;
+}
+
+mat-card {
+  margin-top: 24px;
 }

@@ -1,7 +1,7 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatSort, MatTableDataSource } from '@angular/material';
+import { FormControl } from '@angular/forms';
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { combineLatest, map, startWith, withLatestFrom } from 'rxjs/operators';
@@ -16,6 +16,8 @@ import * as fromRoot from '../reducers';
 export class RuneListComponent implements OnInit {
   @ViewChild(MatSort)
   sort: MatSort;
+  @ViewChild(MatPaginator)
+  paginator: MatPaginator;
 
   dataSource = new MatTableDataSource<RuneView>();
   colors = {
@@ -48,6 +50,7 @@ export class RuneListComponent implements OnInit {
 
   ngOnInit() {
     this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
     this.dataSource.filterPredicate = (data: RuneView, str: string) => {
       if (!str.trim()) {
         return true;
