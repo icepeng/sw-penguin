@@ -16,7 +16,7 @@ export class MonsterEffects {
     switchMap(() => this.store.select(fromRoot.getAllMonsters)),
     tap(monsters =>
       localStorage.setItem(
-        'eff',
+        'eff_1.0',
         JSON.stringify(
           monsters
             .filter(x => x.effectiveList.length > 0)

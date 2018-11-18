@@ -854,51 +854,64 @@ export const monsterMapping = {
 export const runeMapping = {
   effectTypes: {
     0: null,
-    1: '깡체',
-    2: '체퍼',
-    3: '깡공',
-    4: '공퍼',
-    5: '깡방',
-    6: '방퍼',
-    8: '공속',
-    9: '치확',
-    10: '치피',
-    11: '효저',
-    12: '효적',
+    1: 'HP_FLAT',
+    2: 'HP_PERCENT',
+    3: 'ATK_FLAT',
+    4: 'ATK_PERCENT',
+    5: 'DEF_FLAT',
+    6: 'DEF_PERCENT',
+    8: 'SPD',
+    9: 'CRIT_RATE',
+    10: 'CRIT_DMG',
+    11: 'RES',
+    12: 'ACC',
   } as { [key: number]: EFFECT_TYPE },
   sets: {
-    1: '활력',
-    2: '수호',
-    3: '신속',
-    4: '칼날',
-    5: '격노',
-    6: '집중',
-    7: '인내',
-    8: '맹공',
-    10: '절망',
-    11: '흡혈',
-    13: '폭주',
-    14: '응보',
-    15: '의지',
-    16: '보호',
-    17: '반격',
-    18: '파괴',
-    19: '투지',
-    20: '결의',
-    21: '고양',
-    22: '명중',
-    23: '근성',
-    99: '태고',
+    1: 'Energy',
+    2: 'Guard',
+    3: 'Swift',
+    4: 'Blade',
+    5: 'Rage',
+    6: 'Focus',
+    7: 'Endure',
+    8: 'Fatal',
+    10: 'Despair',
+    11: 'Vampire',
+    13: 'Violent',
+    14: 'Nemesis',
+    15: 'Will',
+    16: 'Shield',
+    17: 'Revenge',
+    18: 'Destroy',
+    19: 'Fight',
+    20: 'Determination',
+    21: 'Enhance',
+    22: 'Accuracy',
+    23: 'Tolerance',
+    99: 'Immemorial',
   } as { [key: number]: SET_TYPE },
   rarity: {
-    1: '일반',
-    2: '마법',
-    3: '희귀',
-    4: '영웅',
-    5: '전설',
+    1: 'Common',
+    2: 'Magic',
+    3: 'Rare',
+    4: 'Hero',
+    5: 'Legendary',
   } as { [key: number]: RARITY_TYPE },
+  effectNames: {
+    HP_FLAT: 'HP flat',
+    HP_PERCENT: 'HP%',
+    ATK_FLAT: 'ATK flat',
+    ATK_PERCENT: 'ATK%',
+    DEF_FLAT: 'DEF flat',
+    DEF_PERCENT: 'DEF%',
+    SPD: 'SPD',
+    CRIT_RATE: 'CRate',
+    CRIT_DMG: 'CDmg',
+    RES: 'RES',
+    ACC: 'ACC',
+  },
   mainstat: {
-    깡체: {
+    HP_FLAT: {
       max: {
         1: 804,
         2: 1092,
@@ -908,7 +921,7 @@ export const runeMapping = {
         6: 2448,
       },
     },
-    체퍼: {
+    HP_PERCENT: {
       max: {
         1: 18,
         2: 20,
@@ -918,7 +931,7 @@ export const runeMapping = {
         6: 63,
       },
     },
-    깡공: {
+    ATK_FLAT: {
       max: {
         1: 54,
         2: 74,
@@ -928,7 +941,7 @@ export const runeMapping = {
         6: 160,
       },
     },
-    공퍼: {
+    ATK_PERCENT: {
       max: {
         1: 18,
         2: 20,
@@ -938,7 +951,7 @@ export const runeMapping = {
         6: 63,
       },
     },
-    깡방: {
+    DEF_FLAT: {
       max: {
         1: 54,
         2: 74,
@@ -948,7 +961,7 @@ export const runeMapping = {
         6: 160,
       },
     },
-    방퍼: {
+    DEF_PERCENT: {
       max: {
         1: 18,
         2: 20,
@@ -958,7 +971,7 @@ export const runeMapping = {
         6: 63,
       },
     },
-    공속: {
+    SPD: {
       max: {
         1: 18,
         2: 19,
@@ -968,7 +981,7 @@ export const runeMapping = {
         6: 42,
       },
     },
-    치확: {
+    CRIT_RATE: {
       max: {
         1: 18,
         2: 20,
@@ -978,7 +991,7 @@ export const runeMapping = {
         6: 58,
       },
     },
-    치피: {
+    CRIT_DMG: {
       max: {
         1: 20,
         2: 37,
@@ -988,7 +1001,7 @@ export const runeMapping = {
         6: 80,
       },
     },
-    효저: {
+    RES: {
       max: {
         1: 18,
         2: 20,
@@ -998,7 +1011,7 @@ export const runeMapping = {
         6: 64,
       },
     },
-    효적: {
+    ACC: {
       max: {
         1: 18,
         2: 20,
@@ -1010,7 +1023,7 @@ export const runeMapping = {
     },
   },
   substat: {
-    깡체: {
+    HP_FLAT: {
       max: {
         1: 300,
         2: 525,
@@ -1020,7 +1033,7 @@ export const runeMapping = {
         6: 1875,
       },
     },
-    체퍼: {
+    HP_PERCENT: {
       max: {
         1: 10,
         2: 15,
@@ -1030,7 +1043,7 @@ export const runeMapping = {
         6: 40,
       },
     },
-    깡공: {
+    ATK_FLAT: {
       max: {
         1: 20,
         2: 25,
@@ -1040,7 +1053,7 @@ export const runeMapping = {
         6: 100,
       },
     },
-    공퍼: {
+    ATK_PERCENT: {
       max: {
         1: 10,
         2: 15,
@@ -1050,7 +1063,7 @@ export const runeMapping = {
         6: 40,
       },
     },
-    깡방: {
+    DEF_FLAT: {
       max: {
         1: 20,
         2: 25,
@@ -1060,7 +1073,7 @@ export const runeMapping = {
         6: 100,
       },
     },
-    방퍼: {
+    DEF_PERCENT: {
       max: {
         1: 10,
         2: 15,
@@ -1070,7 +1083,7 @@ export const runeMapping = {
         6: 40,
       },
     },
-    공속: {
+    SPD: {
       max: {
         1: 5,
         2: 10,
@@ -1080,7 +1093,7 @@ export const runeMapping = {
         6: 30,
       },
     },
-    치확: {
+    CRIT_RATE: {
       max: {
         1: 5,
         2: 10,
@@ -1090,7 +1103,7 @@ export const runeMapping = {
         6: 30,
       },
     },
-    치피: {
+    CRIT_DMG: {
       max: {
         1: 10,
         2: 15,
@@ -1100,7 +1113,7 @@ export const runeMapping = {
         6: 35,
       },
     },
-    효저: {
+    RES: {
       max: {
         1: 10,
         2: 15,
@@ -1110,7 +1123,7 @@ export const runeMapping = {
         6: 40,
       },
     },
-    효적: {
+    ACC: {
       max: {
         1: 10,
         2: 15,
@@ -1123,82 +1136,82 @@ export const runeMapping = {
   },
   slotMainStats: {
     1: {
-      깡체: false,
-      체퍼: false,
-      깡공: true,
-      공퍼: false,
-      깡방: false,
-      방퍼: false,
-      공속: false,
-      치확: false,
-      치피: false,
-      효저: false,
-      효적: false,
+      HP_FLAT: false,
+      HP_PERCENT: false,
+      ATK_FLAT: true,
+      ATK_PERCENT: false,
+      DEF_FLAT: false,
+      DEF_PERCENT: false,
+      SPD: false,
+      CRIT_RATE: false,
+      CRIT_DMG: false,
+      RES: false,
+      ACC: false,
     },
     2: {
-      깡체: true,
-      체퍼: true,
-      깡공: true,
-      공퍼: true,
-      깡방: true,
-      방퍼: true,
-      공속: true,
-      치확: false,
-      치피: false,
-      효저: false,
-      효적: false,
+      HP_FLAT: true,
+      HP_PERCENT: true,
+      ATK_FLAT: true,
+      ATK_PERCENT: true,
+      DEF_FLAT: true,
+      DEF_PERCENT: true,
+      SPD: true,
+      CRIT_RATE: false,
+      CRIT_DMG: false,
+      RES: false,
+      ACC: false,
     },
     3: {
-      깡체: false,
-      체퍼: false,
-      깡공: false,
-      공퍼: false,
-      깡방: true,
-      방퍼: false,
-      공속: false,
-      치확: false,
-      치피: false,
-      효저: false,
-      효적: false,
+      HP_FLAT: false,
+      HP_PERCENT: false,
+      ATK_FLAT: false,
+      ATK_PERCENT: false,
+      DEF_FLAT: true,
+      DEF_PERCENT: false,
+      SPD: false,
+      CRIT_RATE: false,
+      CRIT_DMG: false,
+      RES: false,
+      ACC: false,
     },
     4: {
-      깡체: true,
-      체퍼: true,
-      깡공: true,
-      공퍼: true,
-      깡방: true,
-      방퍼: true,
-      공속: false,
-      치확: true,
-      치피: true,
-      효저: false,
-      효적: false,
+      HP_FLAT: true,
+      HP_PERCENT: true,
+      ATK_FLAT: true,
+      ATK_PERCENT: true,
+      DEF_FLAT: true,
+      DEF_PERCENT: true,
+      SPD: false,
+      CRIT_RATE: true,
+      CRIT_DMG: true,
+      RES: false,
+      ACC: false,
     },
     5: {
-      깡체: true,
-      체퍼: false,
-      깡공: false,
-      공퍼: false,
-      깡방: false,
-      방퍼: false,
-      공속: false,
-      치확: false,
-      치피: false,
-      효저: false,
-      효적: false,
+      HP_FLAT: true,
+      HP_PERCENT: false,
+      ATK_FLAT: false,
+      ATK_PERCENT: false,
+      DEF_FLAT: false,
+      DEF_PERCENT: false,
+      SPD: false,
+      CRIT_RATE: false,
+      CRIT_DMG: false,
+      RES: false,
+      ACC: false,
     },
     6: {
-      깡체: true,
-      체퍼: true,
-      깡공: true,
-      공퍼: true,
-      깡방: true,
-      방퍼: true,
-      공속: false,
-      치확: false,
-      치피: false,
-      효저: true,
-      효적: true,
+      HP_FLAT: true,
+      HP_PERCENT: true,
+      ATK_FLAT: true,
+      ATK_PERCENT: true,
+      DEF_FLAT: true,
+      DEF_PERCENT: true,
+      SPD: false,
+      CRIT_RATE: false,
+      CRIT_DMG: false,
+      RES: true,
+      ACC: true,
     },
   },
 };

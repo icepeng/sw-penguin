@@ -16,14 +16,18 @@ export function buildRuneView(
       star: rune.star,
       upgrade: rune.upgrade,
       slot: rune.slot,
-      priEff: `${rune.priEff.type} + ${rune.priEff.amount}`,
+      priEff: `${runeMapping.effectNames[rune.priEff.type]} + ${
+        rune.priEff.amount
+      }`,
       prefixEff: rune.prefixEff.type
-        ? `${rune.prefixEff.type} + ${rune.prefixEff.amount}`
+        ? `${runeMapping.effectNames[rune.prefixEff.type]} + ${
+            rune.prefixEff.amount
+          }`
         : ``,
       secEff: rune.secEff
         .map(
           x =>
-            `${x.type} + ${x.amount}` +
+            `${runeMapping.effectNames[x.type]} + ${x.amount}` +
             (x.grindAmount ? `(+${x.grindAmount})` : ''),
         )
         .join(', '),
@@ -38,14 +42,14 @@ export function buildRuneView(
       star: best.maxRune.star,
       upgrade: best.maxRune.upgrade,
       slot: best.maxRune.slot,
-      priEff: `${best.maxRune.priEff.type} + ${best.maxRune.priEff.amount}`,
+      priEff: `${runeMapping.effectNames[best.maxRune.priEff.type]} + ${best.maxRune.priEff.amount}`,
       prefixEff: best.maxRune.prefixEff.type
-        ? `${best.maxRune.prefixEff.type} + ${best.maxRune.prefixEff.amount}`
+        ? `${runeMapping.effectNames[best.maxRune.prefixEff.type]} + ${best.maxRune.prefixEff.amount}`
         : ``,
       secEff: best.maxRune.secEff
         .map(
           x =>
-            `${x.type} + ${x.amount}` +
+            `${runeMapping.effectNames[x.type]} + ${x.amount}` +
             (x.grindAmount ? `(+${x.grindAmount})` : ''),
         )
         .join(', '),
@@ -60,14 +64,14 @@ export function bestMatch(rune: Rune, monsters: Monster[]) {
   const checkMonsters = monsters.filter(x => x.effectiveList.length > 0);
   if (checkMonsters.length === 0) {
     const defaultEffective = [
-      '체퍼',
-      '공퍼',
-      '방퍼',
-      '공속',
-      '치확',
-      '치피',
-      '효저',
-      '효적',
+      'HP_PERCENT',
+      'ATK_PERCENT',
+      'DEF_PERCENT',
+      'SPD',
+      'CRIT_RATE',
+      'CRIT_DMG',
+      'RES',
+      'ACC',
     ] as EFFECT_TYPE[];
     const maxRune = happyCurcuit(rune, defaultEffective);
     const maxEff = getEfficiency(maxRune, defaultEffective);
@@ -92,8 +96,8 @@ export function bestMatch(rune: Rune, monsters: Monster[]) {
 
 function isImpossible(rune: Rune, type: EFFECT_TYPE) {
   return (
-    (rune.slot === 1 && type === '방퍼') ||
-    (rune.slot === 3 && type === '공퍼') ||
+    (rune.slot === 1 && type === 'DEF_PERCENT') ||
+    (rune.slot === 3 && type === 'ATK_PERCENT') ||
     rune.priEff.type === type
   );
 }
@@ -107,7 +111,7 @@ export function happyCurcuit(rune: Rune, effective: EFFECT_TYPE[]): Rune {
         amount: runeMapping.mainstat[rune.priEff.type].max[rune.star],
       },
       upgrade: 15,
-      rarity: '전설',
+      rarity: 'Legendary',
     };
   }
 
@@ -132,14 +136,14 @@ export function happyCurcuit(rune: Rune, effective: EFFECT_TYPE[]): Rune {
     });
 
   ([
-    '체퍼',
-    '공퍼',
-    '방퍼',
-    '공속',
-    '치확',
-    '치피',
-    '효저',
-    '효적',
+    'HP_PERCENT',
+    'ATK_PERCENT',
+    'DEF_PERCENT',
+    'SPD',
+    'CRIT_RATE',
+    'CRIT_DMG',
+    'RES',
+    'ACC',
   ] as EFFECT_TYPE[]).forEach(x => {
     if (isImpossible(rune, x)) {
       return;
@@ -180,7 +184,7 @@ export function happyCurcuit(rune: Rune, effective: EFFECT_TYPE[]): Rune {
     },
     secEff,
     upgrade: 15,
-    rarity: '전설',
+    rarity: 'Legendary',
   };
 }
 

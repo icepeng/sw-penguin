@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { monsterMapping, runeMapping } from '../mapping';
 import { Monster } from '../models/monster.model';
-import { Rune } from '../models/rune.model';
+import { Rune, ALL_EFFECTS } from '../models/rune.model';
 
 @Injectable({
   providedIn: 'root',
@@ -10,8 +10,8 @@ export class ImportService {
   constructor() {}
 
   import(data) {
-    const effectiveListMap = new Map(
-      JSON.parse(localStorage.getItem('eff') || '[]'),
+    const effectiveListMap = new Map<number, string[]>(
+      JSON.parse(localStorage.getItem('eff_1.0') || '[]'),
     );
     const monsters = data.unit_list.map(x =>
       this.assignMonster(x, effectiveListMap.get(x.unit_id) || []),

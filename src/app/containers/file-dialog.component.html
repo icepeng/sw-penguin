@@ -4,9 +4,9 @@
     <input type="file" (change)="fileChange($event)" placeholder="Upload file" accept=".json">
   </form>
   <p>
-    <a href="https://github.com/Xzandro/sw-exporter">SW Exporter</a>을 이용해 json 파일을 추출할 수 있습니다.<br>
+    Export JSON file with <a href="https://github.com/Xzandro/sw-exporter">SW Exporter</a><br>
   </p>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button mat-raised-button [disabled]="!listener" (click)="fileRead()">확인</button>
+  <button color="primary" mat-flat-button [disabled]="!listener" (click)="fileRead()">Upload</button>
 </mat-dialog-actions>

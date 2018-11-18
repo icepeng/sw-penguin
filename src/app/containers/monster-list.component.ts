@@ -33,14 +33,14 @@ export class MonsterListComponent implements OnInit {
   selectedMonster$: Observable<Monster>;
 
   formGroup = new FormGroup({
-    공퍼: new FormControl(false),
-    체퍼: new FormControl(false),
-    방퍼: new FormControl(false),
-    공속: new FormControl(false),
-    치확: new FormControl(false),
-    치피: new FormControl(false),
-    효적: new FormControl(false),
-    효저: new FormControl(false),
+    ATK_PERCENT: new FormControl(false),
+    HP_PERCENT: new FormControl(false),
+    DEF_PERCENT: new FormControl(false),
+    SPD: new FormControl(false),
+    CRIT_RATE: new FormControl(false),
+    CRIT_DMG: new FormControl(false),
+    ACC: new FormControl(false),
+    RES: new FormControl(false),
   });
 
   constructor(private store: Store<fromRoot.State>) {}
@@ -73,14 +73,14 @@ export class MonsterListComponent implements OnInit {
             return obj;
           },
           {
-            공퍼: false,
-            체퍼: false,
-            방퍼: false,
-            공속: false,
-            치확: false,
-            치피: false,
-            효적: false,
-            효저: false,
+            ATK_PERCENT: false,
+            HP_PERCENT: false,
+            DEF_PERCENT: false,
+            SPD: false,
+            CRIT_RATE: false,
+            CRIT_DMG: false,
+            ACC: false,
+            RES: false,
           },
         ),
         { emitEvent: false },

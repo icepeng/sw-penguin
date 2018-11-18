@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map, withLatestFrom } from 'rxjs/operators';
+import { runeMapping } from '../mapping';
 import { ALL_EFFECTS, ALL_SETS, Rune, RuneView } from '../models/rune.model';
 import * as fromRoot from '../reducers';
 import { buildRuneView } from '../reducers/rune.functions';
@@ -13,6 +14,7 @@ import { buildRuneView } from '../reducers/rune.functions';
   styleUrls: ['./rune-calc.component.css'],
 })
 export class RuneCalcComponent implements OnInit {
+  effectNames = runeMapping.effectNames;
   effects = ALL_EFFECTS;
   sets = ALL_SETS;
   stars = [1, 2, 3, 4, 5, 6];
