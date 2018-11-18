@@ -347,9 +347,6 @@ Apache-2.0
  
 
 
-@angular/compiler
-MIT
-
 @angular/core
 MIT
 
@@ -407,6 +404,14 @@ MIT
 
 @angular/material/form-field
 
+@angular/material/core
+
+@angular/material/select
+
+@angular/material/button
+
+@angular/material/paginator
+
 @ngrx/store
 MIT
 
@@ -415,13 +420,7 @@ MIT
 
 @angular/material/card
 
-@angular/material/core
-
 @angular/material/divider
-
-@angular/material/select
-
-@angular/material/button
 
 @angular/material/icon
 
