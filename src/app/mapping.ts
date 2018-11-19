@@ -839,6 +839,22 @@ export const monsterMapping = {
     22314: 'Valantis',
     22315: 'Pater',
 
+    224: 'Giant Warrior',
+    22411: 'Bagir',
+    22412: 'Vidurr',
+    22413: 'Skogul',
+    22414: 'Einheri',
+    22415: 'Trasar',
+    22513: 'Skogul',
+    22515: 'Trasar',
+
+    226: 'Lightning Emperor',
+    22611: 'Bolverk',
+    22612: 'Baleygr',
+    22613: 'Odin',
+    22614: 'Geldnir',
+    22615: 'Herteit',
+
     15105: 'Devilmon',
     14314: 'Rainbowmon',
 
