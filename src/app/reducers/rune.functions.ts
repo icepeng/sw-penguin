@@ -16,18 +16,18 @@ export function buildRuneView(
       star: rune.star,
       upgrade: rune.upgrade,
       slot: rune.slot,
-      priEff: `${runeMapping.effectNames[rune.priEff.type]} + ${
+      priEff: `${runeMapping.effectNames[rune.priEff.type]} +${
         rune.priEff.amount
       }`,
       prefixEff: rune.prefixEff.type
-        ? `${runeMapping.effectNames[rune.prefixEff.type]} + ${
+        ? `${runeMapping.effectNames[rune.prefixEff.type]} +${
             rune.prefixEff.amount
           }`
         : ``,
       secEff: rune.secEff
         .map(
           x =>
-            `${runeMapping.effectNames[x.type]} + ${x.amount}` +
+            `${runeMapping.effectNames[x.type]} +${x.amount}` +
             (x.grindAmount ? `(+${x.grindAmount})` : ''),
         )
         .join(', '),
@@ -42,14 +42,14 @@ export function buildRuneView(
       star: best.maxRune.star,
       upgrade: best.maxRune.upgrade,
       slot: best.maxRune.slot,
-      priEff: `${runeMapping.effectNames[best.maxRune.priEff.type]} + ${best.maxRune.priEff.amount}`,
+      priEff: `${runeMapping.effectNames[best.maxRune.priEff.type]} +${best.maxRune.priEff.amount}`,
       prefixEff: best.maxRune.prefixEff.type
-        ? `${runeMapping.effectNames[best.maxRune.prefixEff.type]} + ${best.maxRune.prefixEff.amount}`
+        ? `${runeMapping.effectNames[best.maxRune.prefixEff.type]} +${best.maxRune.prefixEff.amount}`
         : ``,
       secEff: best.maxRune.secEff
         .map(
           x =>
-            `${runeMapping.effectNames[x.type]} + ${x.amount}` +
+            `${runeMapping.effectNames[x.type]} +${x.amount}` +
             (x.grindAmount ? `(+${x.grindAmount})` : ''),
         )
         .join(', '),

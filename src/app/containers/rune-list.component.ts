@@ -34,7 +34,6 @@ export class RuneListComponent implements OnInit {
     'slot',
     'star',
     'upgrade',
-    'rarity',
     'maxEfficiency',
     'priEff',
     'prefixEff',
