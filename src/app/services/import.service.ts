@@ -17,7 +17,7 @@ export class ImportService {
       this.assignMonster(x, effectiveListMap.get(x.unit_id) || []),
     );
     const monsterRunes = data.unit_list
-      .reduce((arr, x) => [...arr, ...x.runes], [])
+      .reduce((arr, x) => [...arr, ...Array.from(x.runes)], [])
       .map(x => this.assignRune(x));
     const inventoryRunes = data.runes.map(x => this.assignRune(x));
     const runes = [...monsterRunes, ...inventoryRunes];
@@ -42,7 +42,7 @@ export class ImportService {
       resist: data.resist,
       criticalRate: data.critical_rate,
       criticalDamage: data.critical_damage,
-      runes: data.runes.map(x => x.rune_id),
+      runes: Array.from<any>(data.runes).map(x => x.rune_id),
       effectiveList: effectiveList,
     };
   }
