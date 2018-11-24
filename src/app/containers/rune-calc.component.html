@@ -3,14 +3,6 @@
     <form [formGroup]="formGroup">
       <div class="row">
         <mat-form-field>
-          <mat-select formControlName="set" placeholder="Set">
-            <mat-option>-</mat-option>
-            <mat-option *ngFor="let set of sets" [value]="set">{{
-              set
-            }}</mat-option>
-          </mat-select>
-        </mat-form-field>
-        <mat-form-field>
           <mat-select required formControlName="slot" placeholder="Slot">
             <mat-option>-</mat-option>
             <mat-option *ngFor="let slot of slots" [value]="slot">{{
@@ -18,21 +10,11 @@
             }}</mat-option>
           </mat-select>
         </mat-form-field>
-      </div>
-      <div class="row">
         <mat-form-field>
           <mat-select required formControlName="star" placeholder="Star★">
             <mat-option>-</mat-option>
             <mat-option *ngFor="let star of stars" [value]="star"
               >{{ star }}★</mat-option
-            >
-          </mat-select>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-select required formControlName="upgrade" placeholder="Upgrade">
-            <mat-option>-</mat-option>
-            <mat-option *ngFor="let upgrade of upgrades" [value]="upgrade"
-              >+{{ upgrade }}</mat-option
             >
           </mat-select>
         </mat-form-field>
@@ -47,12 +29,12 @@
           </mat-select>
         </mat-form-field>
         <mat-form-field>
-          <input
-            formControlName="priEffAmount"
-            matInput
-            placeholder="Main stat value"
-            type="number"
-          />
+          <mat-select required formControlName="upgrade" placeholder="Upgrade">
+            <mat-option>-</mat-option>
+            <mat-option *ngFor="let upgrade of upgrades" [value]="upgrade"
+              >+{{ upgrade }}</mat-option
+            >
+          </mat-select>
         </mat-form-field>
       </div>
       <div class="row">
@@ -146,11 +128,15 @@
         </mat-form-field>
       </div>
     </form>
+    <button (click)="reset()" mat-flat-button color="primary">Reset</button>
   </div>
   <div class="stat-area mat-elevation-z2">
     <div *ngIf="(runeView$ | async) as runeView">
       <h1 class="mat-h1">Happy thoughts</h1>
-      {{ runeView.priEff }}<br />
+      {{ runeView.priEff }}
+      <br />
+      {{ runeView.prefixEff }}
+      <br />
       {{ runeView.secEff }}
       <mat-divider></mat-divider>
       <h1 class="mat-h1">Recommended / Max. Efficiency</h1>

@@ -22,12 +22,10 @@ export class RuneCalcComponent implements OnInit {
   upgrades = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 
   formGroup = new FormGroup({
-    set: new FormControl(null),
     star: new FormControl(null, Validators.required),
     upgrade: new FormControl(null, Validators.required),
     slot: new FormControl(null, Validators.required),
     priEff: new FormControl(null, Validators.required),
-    priEffAmount: new FormControl(null),
     prefixEff: new FormControl(null),
     prefixEffAmount: new FormControl(null),
     secEff1: new FormControl(null),
@@ -49,13 +47,13 @@ export class RuneCalcComponent implements OnInit {
       withLatestFrom(this.store.pipe(select(fromRoot.getMonsterEntities))),
       map(([value, monsterEntities]) => {
         const rune = {
-          set: value.set,
+          set: null, // not used in caluclation
           star: value.star,
           upgrade: value.upgrade,
           slot: value.slot,
           priEff: {
             type: value.priEff,
-            amount: value.priEffAmount,
+            amount: null, // not used in calculation
           },
           prefixEff: {
             type: value.prefixEff,
@@ -102,5 +100,24 @@ export class RuneCalcComponent implements OnInit {
         }
       }),
     );
+  }
+
+  reset() {
+    this.formGroup.reset({
+      star: null,
+      upgrade: null,
+      slot: null,
+      priEff: null,
+      prefixEff: null,
+      prefixEffAmount: null,
+      secEff1: null,
+      secEff1Amount: null,
+      secEff2: null,
+      secEff2Amount: null,
+      secEff3: null,
+      secEff3Amount: null,
+      secEff4: null,
+      secEff4Amount: null,
+    });
   }
 }
